@@ -1,12 +1,16 @@
 import mongoose from "mongoose";
+import dotenv from "dotenv"
+
+dotenv.config({ path: './config.env' });
 
 if (!process.env.MONGO_URL) {
+  console.log("lkdjalsdasldajlskd asld lkdjalsdasldajlskd asldlkdjalsdasldajlskd asldlkdjalsdasldajlskd asldlkdjalsdasldajlskd asld",process.env.MONGO_URL)
   throw new Error("Please add the MONGO_URL environment variable");
 }
 
 mongoose.connect(process.env.MONGO_URL, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
+  // useNewUrlParser: true,
+  // useUnifiedTopology: true,
 });
 
 const database = mongoose.connection;

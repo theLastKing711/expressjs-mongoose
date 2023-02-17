@@ -1,11 +1,11 @@
 import { Router } from "express";
-import { CountryModel, ICountry } from "../models/country";
+import { IProduct, ProductModel } from "../models/product";
 
 const routes = Router();
 
 routes.get("/", async (req, res) => {
   try {
-    const countries: ICountry[] = await CountryModel.find().exec();
+    const countries: IProduct[] = await ProductModel.find().exec();
     return res.json(countries);
   } catch (error) {
     console.error(error);
@@ -15,9 +15,9 @@ routes.get("/", async (req, res) => {
 
 routes.post("/", async (req, res) => {
   try {
-    const country: ICountry = req.body;
+    const country: IProduct = req.body;
 
-    const countryExists = await CountryModel.findOne({
+    const countryExists = await ProductModel.findOne({
       name: country.name,
     }).exec();
 
@@ -27,7 +27,7 @@ routes.post("/", async (req, res) => {
         .json({ error: "There is already another country with this name" });
     }
 
-    const newCountry = await CountryModel.create(country);
+    const newCountry = await ProductModel.create(country);
     return res.status(201).json(newCountry);
   } catch (error) {
     console.error(error);
